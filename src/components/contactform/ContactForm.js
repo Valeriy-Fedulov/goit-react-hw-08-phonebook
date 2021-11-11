@@ -1,24 +1,22 @@
-import React from "react";
-import { v4 as uuidv4 } from "uuid";
-import PropTypes from "prop-types";
-import s from "./ContactForm.module.css";
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
+import s from './ContactForm.module.css';
 
 class ContactForm extends React.Component {
   state = {
-    name: "",
-    number: "",
+    name: '',
+    number: '',
   };
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
 
-    if (
-      this.props.contacts.find((contact) => contact.name === this.state.name)
-    ) {
+    if (this.props.contacts.find(contact => contact.name === this.state.name)) {
       alert(`${this.state.name} is already in contacts`);
     } else {
       this.props.onSubmit({
@@ -31,7 +29,7 @@ class ContactForm extends React.Component {
   };
 
   reset = () => {
-    this.setState({ name: "", number: "" });
+    this.setState({ name: '', number: '' });
   };
 
   render() {

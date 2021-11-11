@@ -1,39 +1,44 @@
-import React from "react";
-import "./App.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import './App.css';
+import PropTypes from 'prop-types';
 
-import { ContactForm } from "./components/contactform";
-import { ContactList } from "./components/contactlist";
-import { Filter } from "./components/filter";
+import { ContactForm } from './components/contactform';
+import { ContactList } from './components/contactlist';
+import { Filter } from './components/filter';
 
 class App extends React.Component {
   state = {
     contacts: [],
-    filter: "",
+    filter: '',
   };
 
-  changeFilter = (e) => {
+  componentDidMount() {
+    localStorage.getItem('contacts') &&
+      this.setState({ contacts: JSON.parse(localStorage.getItem('contacts')) });
+  }
+
+  changeFilter = e => {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   };
 
-  formSubmitHandler = (data) => {
-    this.setState({ contacts: [...this.state.contacts, data] });
+  formSubmitHandler = data => {
+    const item = [...this.state.contacts, data];
+    this.setState({ contacts: item });
+    localStorage.setItem('contacts', JSON.stringify(item));
   };
 
   getVisibleContacts = () => {
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
 
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(normalizedFilter)
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
     );
   };
 
-  deleteContact = (contactId) => {
-    this.setState((prevState) => ({
-      contacts: prevState.contacts.filter(
-        (contact) => contact.id !== contactId
-      ),
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
 
