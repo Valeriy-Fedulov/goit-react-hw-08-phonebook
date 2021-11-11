@@ -17,14 +17,16 @@ class App extends React.Component {
       this.setState({ contacts: JSON.parse(localStorage.getItem('contacts')) });
   }
 
+  componentDidUpdate() {
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  }
+
   changeFilter = e => {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   };
 
   formSubmitHandler = data => {
-    const item = [...this.state.contacts, data];
-    this.setState({ contacts: item });
-    localStorage.setItem('contacts', JSON.stringify(item));
+    this.setState({ contacts: [...this.state.contacts, data] });
   };
 
   getVisibleContacts = () => {
