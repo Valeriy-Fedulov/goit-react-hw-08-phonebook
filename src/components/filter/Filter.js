@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import s from "./Filter.module.css";
+import PropTypes from 'prop-types';
+import s from './Filter.module.css';
 
-const Filter = ({ filter, changeFilter }) => (
+const Filter = ({ filter, setFilter }) => (
   <label>
     Find contacts by name
     <input
@@ -12,7 +12,7 @@ const Filter = ({ filter, changeFilter }) => (
       title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
       required
       value={filter}
-      onChange={changeFilter}
+      onChange={e => setFilter(e.currentTarget.value)}
     />
   </label>
 );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
 
@@ -6,60 +6,47 @@ import { ContactForm } from './components/contactform';
 import { ContactList } from './components/contactlist';
 import { Filter } from './components/filter';
 
-class App extends React.Component {
-  state = {
-    contacts: [],
-    filter: '',
-  };
+function App() {
+  const [contacts, setContacts] = useState([]);
+  const [filter, setFilter] = useState('');
 
-  componentDidMount() {
+  useEffect(() => {
     localStorage.getItem('contacts') &&
-      this.setState({ contacts: JSON.parse(localStorage.getItem('contacts')) });
+      setContacts(JSON.parse(localStorage.getItem('contacts')));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
+
+  function formSubmitHandler(data) {
+    setContacts([...contacts, data]);
   }
 
-  componentDidUpdate() {
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  }
-
-  changeFilter = e => {
-    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
-  };
-
-  formSubmitHandler = data => {
-    this.setState({ contacts: [...this.state.contacts, data] });
-  };
-
-  getVisibleContacts = () => {
-    const { contacts, filter } = this.state;
+  function getVisibleContacts() {
     const normalizedFilter = filter.toLowerCase();
 
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
-  };
-
-  deleteContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-    }));
-  };
-
-  render() {
-    const { contacts, filter } = this.state;
-
-    return (
-      <>
-        <h1>Phonebook</h1>
-        <ContactForm contacts={contacts} onSubmit={this.formSubmitHandler} />
-        <h2>Contacts</h2>
-        <Filter filter={filter} changeFilter={this.changeFilter} />
-        <ContactList
-          contacts={this.getVisibleContacts()}
-          deleteContact={this.deleteContact}
-        />
-      </>
-    );
   }
+
+  function deleteContact(contactId) {
+    setContacts(contacts.filter(contact => contact.id !== contactId));
+  }
+
+  return (
+    <>
+      <h1>Phonebook</h1>
+      <ContactForm contacts={contacts} onSubmit={formSubmitHandler} />
+      <h2>Contacts</h2>
+      <Filter filter={filter} setFilter={setFilter} />
+      <ContactList
+        contacts={getVisibleContacts()}
+        deleteContact={deleteContact}
+      />
+    </>
+  );
 }
 
 App.propTypes = {
