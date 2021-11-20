@@ -20,7 +20,7 @@ function App() {
   }, [contacts]);
 
   function formSubmitHandler(data) {
-    setContacts([...contacts, data]);
+    setContacts(prevContacts => [...prevContacts, data]);
   }
 
   function getVisibleContacts() {
