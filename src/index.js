@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { App } from './App';
+import App from './App';
 import store from './redux/store';
-import { myAction } from './redux/actions';
-
-console.log(store.dispatch(myAction));
-console.log(store.getState());
+import { formSubmitHandler, deleteContact } from './redux/actions';
+import { Provider } from 'react-redux';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

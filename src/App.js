@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { ContactForm } from './components/contactform';
 import { ContactList } from './components/contactlist';
@@ -19,20 +20,12 @@ function App() {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  function formSubmitHandler(data) {
-    setContacts(prevContacts => [...prevContacts, data]);
-  }
-
   function getVisibleContacts() {
     const normalizedFilter = filter.toLowerCase();
 
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
-  }
-
-  function deleteContact(contactId) {
-    setContacts(contacts.filter(contact => contact.id !== contactId));
   }
 
   return (
@@ -54,4 +47,4 @@ App.propTypes = {
   filter: PropTypes.string,
 };
 
-export { App };
+export default connect()(App);
