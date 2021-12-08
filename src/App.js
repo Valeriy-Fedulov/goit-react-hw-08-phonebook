@@ -31,12 +31,13 @@ function App() {
   return (
     <>
       <h1>Phonebook</h1>
-      <ContactForm contacts={contacts} onSubmit={formSubmitHandler} />
+      <ContactForm />
+      {/* <ContactForm contacts={contacts} onSubmit={formSubmitHandler} /> */}
       <h2>Contacts</h2>
       <Filter filter={filter} setFilter={setFilter} />
       <ContactList
         contacts={getVisibleContacts()}
-        deleteContact={deleteContact}
+        // deleteContact={deleteContact}
       />
     </>
   );
