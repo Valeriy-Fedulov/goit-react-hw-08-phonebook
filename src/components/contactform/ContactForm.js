@@ -3,25 +3,26 @@ import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 import s from './ContactForm.module.css';
 import { connect } from 'react-redux';
-import * as actions from './redux/actions';
+import * as actions from '../../redux/actions';
+import store from '../../redux/store';
 
-function ContactForm(contacts, formSubmitHandler) {
+export function ContactForm(contacts, formSubmitHandler) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    if (contacts.find(contact => contact.name === name)) {
-      alert(`${name} is already in contacts`);
-    } else {
-      formSubmitHandler({
-        id: uuidv4(),
-        name: name,
-        number: number,
-      });
-      reset();
-    }
+    console.log(contacts);
+    // if (contacts.find(contact => contact.name === name)) {
+    //   alert(`${name} is already in contacts`);
+    // } else {
+    formSubmitHandler({
+      id: uuidv4(),
+      name: name,
+      number: number,
+    });
+    reset();
+    // }
   }
 
   function reset() {
@@ -80,7 +81,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    formSubmitHandler: () => dispatch(actions.formSubmitHandler()),
+    formSubmitHandler: () => store.dispatch(actions.formSubmitHandler()),
   };
 };
 

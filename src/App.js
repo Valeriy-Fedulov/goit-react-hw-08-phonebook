@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 
-import { ContactForm } from './components/contactform';
+import { ContactForm } from './components/contactform/ContactForm';
 import { ContactList } from './components/contactlist';
 import { Filter } from './components/filter';
 
