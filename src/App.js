@@ -17,9 +17,9 @@ function App(contacts, formSubmitHandler, deleteContact) {
   //     setContacts(JSON.parse(localStorage.getItem('contacts')));
   // }, []);
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
   // function getVisibleContacts() {
   //   const normalizedFilter = filter.toLowerCase();
@@ -32,7 +32,7 @@ function App(contacts, formSubmitHandler, deleteContact) {
   return (
     <>
       <h1>Phonebook</h1>
-      <ContactForm contacts={contacts} onSubmit={formSubmitHandler} />
+      <ContactForm />
       <h2>Contacts</h2>
       <Filter filter={filter} setFilter={setFilter} />
       <ContactList
