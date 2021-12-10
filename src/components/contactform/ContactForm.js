@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../redux/actions';
 import store from '../../redux/store';
 
-export function ContactForm(contacts, formSubmitHandler) {
+export function ContactForm({ contacts, onformSubmitHandler }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -16,11 +16,19 @@ export function ContactForm(contacts, formSubmitHandler) {
     // if (contacts.find(contact => contact.name === name)) {
     //   alert(`${name} is already in contacts`);
     // } else {
-    formSubmitHandler({
+    onformSubmitHandler({
       id: uuidv4(),
       name: name,
       number: number,
     });
+    store.dispatch(
+      actions.formSubmitHandler({
+        id: uuidv4(),
+        name: name,
+        number: number,
+      }),
+    );
+    console.log(store.getState());
     reset();
     // }
   }
@@ -75,13 +83,13 @@ ContactForm.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    contacts: state.contacts,
+    contacts: state.contacts.items,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    formSubmitHandler: () => store.dispatch(actions.formSubmitHandler()),
+    onformSubmitHandler: () => dispatch(actions.formSubmitHandler()),
   };
 };
 

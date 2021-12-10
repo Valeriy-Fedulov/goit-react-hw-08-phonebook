@@ -3,15 +3,20 @@ import './App.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
+import { v4 as uuidv4 } from 'uuid';
 
 import { ContactForm } from './components/contactform/ContactForm';
 import { ContactList } from './components/contactlist';
 import { Filter } from './components/filter';
 
-function App(contacts, formSubmitHandler, deleteContact) {
+function App({ contacts, formSubmitHandler, deleteContact }) {
   // const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
-
+  // formSubmitHandler({
+  //   id: uuidv4(),
+  //   name: 'zaq',
+  //   number: 135790,
+  // });
   // useEffect(() => {
   //   localStorage.getItem('contacts') &&
   //     setContacts(JSON.parse(localStorage.getItem('contacts')));
@@ -50,7 +55,7 @@ App.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    contacts: state.contacts,
+    contacts: state.contacts.items,
   };
 };
 

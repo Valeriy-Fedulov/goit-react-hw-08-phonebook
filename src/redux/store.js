@@ -1,11 +1,17 @@
 import { createStore } from 'redux';
 
-const initialState = { contacts: [] };
+const initialState = { contacts: { items: [], filter: '' } };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'contact/formSubmitHandler':
-      return { contacts: [...state.contacts, ...payload] };
+      return {
+        ...state,
+        contacts: {
+          ...state.contacts,
+          items: [...state.contacts.items, payload],
+        },
+      };
 
     case 'deleteContact':
       return {
