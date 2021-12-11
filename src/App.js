@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ContactForm } from './components/contactform/ContactForm';
+import ContactForm from './components/contactform/ContactForm';
 import { ContactList } from './components/contactlist';
 import { Filter } from './components/filter';
 
-function App({ contacts, formSubmitHandler, deleteContact }) {
+function App() {
   // const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
   // formSubmitHandler({
@@ -41,8 +41,8 @@ function App({ contacts, formSubmitHandler, deleteContact }) {
       <h2>Contacts</h2>
       <Filter filter={filter} setFilter={setFilter} />
       <ContactList
-        // contacts={getVisibleContacts()}
-        deleteContact={deleteContact}
+      // contacts={getVisibleContacts()}
+      // deleteContact={deleteContact}
       />
     </>
   );
@@ -53,17 +53,17 @@ App.propTypes = {
   filter: PropTypes.string,
 };
 
-const mapStateToProps = state => {
-  return {
-    contacts: state.contacts.items,
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     items: state.contacts.items,
+//   };
+// };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    formSubmitHandler: () => dispatch(actions.formSubmitHandler()),
-    deleteContact: () => dispatch(actions.deleteContact()),
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     formSubmitHandler: data => dispatch(actions.formSubmitHandler(data)),
+//     deleteContact: () => dispatch(actions.deleteContact()),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

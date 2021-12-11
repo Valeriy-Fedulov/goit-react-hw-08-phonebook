@@ -6,28 +6,32 @@ import { connect } from 'react-redux';
 import * as actions from '../../redux/actions';
 import store from '../../redux/store';
 
-export function ContactForm({ contacts, onformSubmitHandler }) {
+function ContactForm({ items, formSubmitHandler }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
+  // console.log(
+  //   formSubmitHandler({
+  //     id: uuidv4(),
+  //     name: 'gfdgh',
+  //     number: 53646,
+  //   }),
+  // );
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(contacts);
     // if (contacts.find(contact => contact.name === name)) {
     //   alert(`${name} is already in contacts`);
     // } else {
-    onformSubmitHandler({
-      id: uuidv4(),
-      name: name,
-      number: number,
-    });
-    store.dispatch(
-      actions.formSubmitHandler({
-        id: uuidv4(),
-        name: name,
-        number: number,
-      }),
-    );
+    // onformSubmitHandler = () =>
+    //   actions.formSubmitHandler({
+    //     id: uuidv4(),
+    //     name: name,
+    //     number: number,
+    //   });
+
+    formSubmitHandler({ id: uuidv4(), name: name, number: number });
+    console.log(store.getState());
     console.log(store.getState());
     reset();
     // }
@@ -83,13 +87,13 @@ ContactForm.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    contacts: state.contacts.items,
+    items: state.contacts.items,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onformSubmitHandler: () => dispatch(actions.formSubmitHandler()),
+    formSubmitHandler: items => dispatch(actions.formSubmitHandler(items)),
   };
 };
 
