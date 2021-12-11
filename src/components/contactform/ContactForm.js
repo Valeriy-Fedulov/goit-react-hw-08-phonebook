@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import PropTypes from 'prop-types';
 import s from './ContactForm.module.css';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions';
+import * as actions from '../../redux/contacts/contacts-actions';
 
 function ContactForm({ items, addContact }) {
   const [name, setName] = useState('');
@@ -63,20 +62,12 @@ function ContactForm({ items, addContact }) {
   );
 }
 
-ContactForm.propTypes = {
-  name: PropTypes.string,
-};
+const mapStateToProps = state => ({
+  items: state.contacts.items,
+});
 
-const mapStateToProps = state => {
-  return {
-    items: state.contacts.items,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addContact: data => dispatch(actions.addContact(data)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  addContact: data => dispatch(actions.addContact(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

@@ -1,7 +1,7 @@
 // import React, { useEffect } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import * as actions from './redux/actions';
+import * as actions from './redux/contacts/contacts-actions';
 
 import ContactForm from './components/contactform/ContactForm';
 import { ContactList } from './components/contactlist';
@@ -28,16 +28,12 @@ function App({ items, addContact }) {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    items: state.contacts.items,
-  };
-};
+const mapStateToProps = state => ({
+  items: state.contacts.items,
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addContact: data => dispatch(actions.addContact(data)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  addContact: data => dispatch(actions.addContact(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

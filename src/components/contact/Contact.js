@@ -1,22 +1,12 @@
 import PropTypes from 'prop-types';
 import s from './Contact.module.css';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions';
+import * as actions from '../../redux/contacts/contacts-actions';
 
 function Contact({ items, filter, deleteContact }) {
-  const contacts = getVisibleContacts();
-
-  function getVisibleContacts() {
-    const normalizedFilter = filter.toLowerCase();
-
-    return items.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter),
-    );
-  }
-
   return (
     <>
-      {contacts.map(contact => (
+      {items.map(contact => (
         <li className={s.list} key={contact.id}>
           {contact.name}: {contact.number}
           <button
@@ -37,17 +27,20 @@ Contact.propTypes = {
   filter: PropTypes.string,
 };
 
-const mapStateToProps = state => {
-  return {
-    items: state.contacts.items,
-    filter: state.contacts.filter,
-  };
+const getVisibleContacts = (allItems, filter) => {
+  const normalizedFilter = filter.toLowerCase();
+
+  return allItems.filter(({ name }) =>
+    name.toLowerCase().includes(normalizedFilter),
+  );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    deleteContact: contactId => dispatch(actions.deleteContact(contactId)),
-  };
-};
+const mapStateToProps = ({ contacts: { items, filter } }) => ({
+  items: getVisibleContacts(items, filter),
+});
+
+const mapDispatchToProps = dispatch => ({
+  deleteContact: contactId => dispatch(actions.deleteContact(contactId)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Contact);
