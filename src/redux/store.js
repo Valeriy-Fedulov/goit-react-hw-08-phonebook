@@ -4,18 +4,30 @@ const initialState = { contacts: { items: [], filter: '' } };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'contact/formSubmitHandler':
+    case 'contact/addContact':
       return {
-        ...state,
         contacts: {
           ...state.contacts,
           items: [...state.contacts.items, payload],
         },
       };
 
-    case 'deleteContact':
+    case 'contact/deleteContact':
       return {
-        contacts: state.contacts.filter(contact => contact.id !== payload),
+        contacts: {
+          ...state.contacts,
+          items: [
+            ...state.contacts.items.filter(contact => contact.id !== payload),
+          ],
+        },
+      };
+
+    case 'filter/setFilter':
+      return {
+        contacts: {
+          ...state.contacts,
+          filter: payload,
+        },
       };
 
     default:

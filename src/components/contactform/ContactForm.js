@@ -4,37 +4,19 @@ import PropTypes from 'prop-types';
 import s from './ContactForm.module.css';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions';
-import store from '../../redux/store';
 
-function ContactForm({ items, formSubmitHandler }) {
+function ContactForm({ items, addContact }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  // console.log(
-  //   formSubmitHandler({
-  //     id: uuidv4(),
-  //     name: 'gfdgh',
-  //     number: 53646,
-  //   }),
-  // );
-
   function handleSubmit(e) {
     e.preventDefault();
-    // if (contacts.find(contact => contact.name === name)) {
-    //   alert(`${name} is already in contacts`);
-    // } else {
-    // onformSubmitHandler = () =>
-    //   actions.formSubmitHandler({
-    //     id: uuidv4(),
-    //     name: name,
-    //     number: number,
-    //   });
-
-    formSubmitHandler({ id: uuidv4(), name: name, number: number });
-    console.log(store.getState());
-    console.log(store.getState());
-    reset();
-    // }
+    if (items.find(contact => contact.name === name)) {
+      alert(`${name} is already in contacts`);
+    } else {
+      addContact({ id: uuidv4(), name, number });
+      reset();
+    }
   }
 
   function reset() {
@@ -93,7 +75,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    formSubmitHandler: items => dispatch(actions.formSubmitHandler(items)),
+    addContact: data => dispatch(actions.addContact(data)),
   };
 };
 

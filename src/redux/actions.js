@@ -1,18 +1,14 @@
-export const ADD = {
-  type: 'contact/formSubmitHandler',
-  payload: {
-    id: 1,
-    name: 'dtyuthjk',
-    number: 123456789,
-  },
-};
-
-export const formSubmitHandler = data => ({
-  type: 'contact/formSubmitHandler',
+export const addContact = data => ({
+  type: 'contact/addContact',
   payload: data,
 });
 
 export const deleteContact = contactId => ({
   type: 'contact/deleteContact',
   payload: contactId,
+});
+
+export const setFilter = value => ({
+  type: 'filter/setFilter',
+  payload: value,
 });

@@ -1,12 +1,9 @@
-import { Contact } from '../contact';
-import PropTypes from 'prop-types';
+import Contact from '../contact/Contact';
 
-const ContactList = ({ contacts, deleteContact }) => (
-  <ul>{/* <Contact contacts={contacts} deleteContact={deleteContact} /> */}</ul>
+const ContactList = () => (
+  <ul>
+    <Contact />
+  </ul>
 );
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(PropTypes.shape),
-};
 
 export { ContactList };
