@@ -1,22 +1,9 @@
-// import React, { useEffect } from 'react';
 import './App.css';
-import { connect } from 'react-redux';
-import actions from './redux/contacts/contacts-actions';
+import ContactForm from './components/contactform';
+import ContactList from './components/contactlist';
+import Filter from './components/filter';
 
-import ContactForm from './components/contactform/ContactForm';
-import { ContactList } from './components/contactlist';
-import Filter from './components/filter/Filter';
-
-function App({ items, addContact }) {
-  // useEffect(() => {
-  //   localStorage.getItem('items') &&
-  //     addContact(JSON.parse(localStorage.getItem('items')));
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem('items', JSON.stringify(items));
-  // }, [items]);
-
+function App() {
   return (
     <>
       <h1>Phonebook</h1>
@@ -28,12 +15,4 @@ function App({ items, addContact }) {
   );
 }
 
-const mapStateToProps = state => ({
-  items: state.contacts.items,
-});
-
-const mapDispatchToProps = dispatch => ({
-  addContact: data => dispatch(actions.addContact(data)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

@@ -1,4 +1,4 @@
-import Contact from '../contact/Contact';
+import Contact from '../contact';
 
 const ContactList = () => (
   <ul>
@@ -6,4 +6,4 @@ const ContactList = () => (
   </ul>
 );
 
-export { ContactList };
+export default ContactList;
