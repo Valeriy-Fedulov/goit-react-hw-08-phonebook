@@ -1,7 +1,7 @@
 // import React, { useEffect } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import * as actions from './redux/contacts/contacts-actions';
+import actions from './redux/contacts/contacts-actions';
 
 import ContactForm from './components/contactform/ContactForm';
 import { ContactList } from './components/contactlist';

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import s from './Contact.module.css';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/contacts/contacts-actions';
+import actions from '../../redux/contacts/contacts-actions';
 
 function Contact({ items, filter, deleteContact }) {
   return (

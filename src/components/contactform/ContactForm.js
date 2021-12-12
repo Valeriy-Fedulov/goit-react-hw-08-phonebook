@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import s from './ContactForm.module.css';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/contacts/contacts-actions';
+import actions from '../../redux/contacts/contacts-actions';
 
 function ContactForm({ items, addContact }) {
   const [name, setName] = useState('');
