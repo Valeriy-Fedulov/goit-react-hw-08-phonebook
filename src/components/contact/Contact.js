@@ -1,11 +1,19 @@
 import s from './Contact.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contacts/contacts-operations';
 import { getVisibleContacts } from '../../redux/contacts/contacts-selectors';
+import { useEffect } from 'react';
+import {
+  deleteContact,
+  fetchContacts,
+} from '../../redux/contacts/contacts-operations';
 
 export default function Contact() {
   const contacts = useSelector(getVisibleContacts);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <>
