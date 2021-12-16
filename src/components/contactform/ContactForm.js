@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import s from './ContactForm.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import actions from '../../redux/contacts/contacts-actions';
+import { addContact } from '../../redux/contacts/contacts-operations';
 import { getItems } from '../../redux/contacts/contacts-selectors';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const items = useSelector(getItems);
   const dispatch = useDispatch();
@@ -17,14 +16,14 @@ export default function ContactForm() {
     if (items.find(contact => contact.name === name)) {
       alert(`${name} is already in contacts`);
     } else {
-      dispatch(actions.addContact({ id: uuidv4(), name, number }));
+      dispatch(addContact({ name, phone }));
       reset();
     }
   }
 
   function reset() {
     setName('');
-    setNumber('');
+    setPhone('');
   }
 
   return (
@@ -45,17 +44,17 @@ export default function ContactForm() {
         />
       </label>
       <label>
-        Number
+        Phone
         <input
           className={s.input}
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
-          value={number}
+          value={phone}
           onChange={e => {
-            setNumber(e.currentTarget.value);
+            setPhone(e.currentTarget.value);
           }}
         />
       </label>

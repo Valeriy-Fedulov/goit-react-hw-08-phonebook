@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import s from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import actions from '../../redux/contacts/contacts-actions';
+import { setFilter } from '../../redux/contacts/contacts-actions';
 import { getFilter } from '../../redux/contacts/contacts-selectors';
 
 export default function Filter() {
@@ -19,7 +19,7 @@ export default function Filter() {
         title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
         required
         value={filter}
-        onChange={e => dispatch(actions.setFilter(e.currentTarget.value))}
+        onChange={e => dispatch(setFilter(e.currentTarget.value))}
       />
     </label>
   );

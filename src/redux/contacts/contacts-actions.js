@@ -1,25 +1,23 @@
 import { createAction } from '@reduxjs/toolkit';
-import axios from 'axios';
 
-axios.defaults.baseURL = 'https://61b810b564e4a10017d18d8c.mockapi.io';
+export const fetchContactsRequest = createAction(
+  'contacts/fetchContactRequest',
+);
+export const fetchContactsSuccess = createAction(
+  'contacts/fetchContactSuccess',
+);
+export const fetchContactsError = createAction('contacts/fetchContactError');
 
-const addContact = text => dispatch => {
-  const contact = { text };
+export const addContactRequest = createAction('contacts/addContactRequest');
+export const addContactSuccess = createAction('contacts/addContactSuccess');
+export const addContactError = createAction('contacts/addContactError');
 
-  dispatch({ type: 'contacts/addContactRequest' });
+export const deleteContactRequest = createAction(
+  'contacts/deleteContactRequest',
+);
+export const deleteContactSuccess = createAction(
+  'contacts/deleteContactSuccess',
+);
+export const deleteContactError = createAction('contacts/deleteContactError');
 
-  axios
-    .post('/contacts', contact)
-    .then(({ data }) =>
-      dispatch({ type: 'contacts/addContactSuccess', payload: data }),
-    )
-    .catch(error =>
-      dispatch({ type: 'contacts/addContactError', payload: error }),
-    );
-};
-
-const deleteContact = createAction('contact/deleteContact');
-const setFilter = createAction('contact/setFilter');
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default { addContact, deleteContact, setFilter };
+export const setFilter = createAction('contact/setFilter');

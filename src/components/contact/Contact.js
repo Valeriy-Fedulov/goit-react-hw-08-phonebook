@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import s from './Contact.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import actions from '../../redux/contacts/contacts-actions';
+import { deleteContact } from '../../redux/contacts/contacts-operations';
 import { getVisibleContacts } from '../../redux/contacts/contacts-selectors';
+import { connect } from 'react-redux';
+import { fetchContacts } from '../../redux/contacts/contacts-operations';
 
-export default function Contact() {
+function Contact({ fetchContacts }) {
   const contacts = useSelector(getVisibleContacts);
   const dispatch = useDispatch();
 
@@ -12,11 +14,11 @@ export default function Contact() {
     <>
       {contacts.map(contact => (
         <li className={s.list} key={contact.id}>
-          {contact.name}: {contact.number}
+          {contact.name}: {contact.phone}
           <button
             className={s.button}
             type="button"
-            onClick={() => dispatch(actions.deleteContact(contact.id))}
+            onClick={() => dispatch(deleteContact(contact.id))}
           >
             Delete
           </button>
@@ -30,3 +32,9 @@ Contact.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape),
   filter: PropTypes.string,
 };
+
+const mapDispatchToProps = dispatch => ({
+  fetchContacts: () => dispatch(fetchContacts()),
+});
+
+export default connect(null, mapDispatchToProps)(Contact);
