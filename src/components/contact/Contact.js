@@ -1,7 +1,11 @@
 import s from './Contact.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { getVisibleContacts } from '../../redux/contacts/contacts-selectors';
 import { useEffect } from 'react';
+import ReactLoading from 'react-loading';
+import {
+  getVisibleContacts,
+  getLoading,
+} from '../../redux/contacts/contacts-selectors';
 import {
   deleteContact,
   fetchContacts,
@@ -9,6 +13,7 @@ import {
 
 export default function Contact() {
   const contacts = useSelector(getVisibleContacts);
+  const isLoading = useSelector(getLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,6 +22,9 @@ export default function Contact() {
 
   return (
     <>
+      {isLoading && (
+        <ReactLoading type="bars" color="black" height={167} width={75} />
+      )}
       {contacts.map(contact => (
         <li className={s.list} key={contact.id}>
           {contact.name}: {contact.phone}

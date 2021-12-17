@@ -11,3 +11,5 @@ export const getVisibleContacts = state => {
     name.toLowerCase().includes(normalizedFilter),
   );
 };
+
+export const getLoading = state => state.contacts.loading;
