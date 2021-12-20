@@ -1,5 +1,5 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-// import logger from 'redux-logger';
+import logger from 'redux-logger';
 import {
   FLUSH,
   REHYDRATE,
@@ -9,6 +9,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import contactsReducer from './contacts/contacts-reducer';
+import persistStore from 'redux-persist/es/persistStore';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -16,10 +17,10 @@ const middleware = [
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  // logger,
+  logger,
 ];
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     contacts: contactsReducer,
   },
@@ -27,7 +28,7 @@ const store = configureStore({
   devTools: process.env.NODE_ENV === 'development',
 });
 
-// const persistor = persistStore(store);
+export const persistor = persistStore(store);
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default store;
+// export default { store, persistor };
