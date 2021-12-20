@@ -25,6 +25,13 @@ function LoginView() {
           Почта
           {/* <input type="email" name="email" value={email} onChange={ handleChange}/> */}
         </label>
+
+        <label>
+          Пароль
+          {/* <input type="password" name="password" value={password} onChange={ handleChange}/> */}
+        </label>
+
+        <button type="submit"></button>
       </form>
     </>
   );
