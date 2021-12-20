@@ -1,12 +1,18 @@
-import React from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import authOperations from '../redux/auth/auth-operations';
 
 function LoginView() {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
       case 'email':
-        return;
+        return setEmail(value);
       case 'password':
-        return;
+        return setPassword(value);
       default:
         return;
     }
@@ -14,7 +20,9 @@ function LoginView() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // dispatch(authOperations.logIn({ email, password }));
+    dispatch(authOperations.logIn({ email, password }));
+    setEmail('');
+    setPassword('');
   };
 
   return (
@@ -23,12 +31,22 @@ function LoginView() {
       <form onSubmit={handleSubmit} autoComplete="off">
         <label>
           Почта
-          {/* <input type="email" name="email" value={email} onChange={ handleChange}/> */}
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
         </label>
 
         <label>
           Пароль
-          {/* <input type="password" name="password" value={password} onChange={ handleChange}/> */}
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
         </label>
 
         <button type="submit"></button>

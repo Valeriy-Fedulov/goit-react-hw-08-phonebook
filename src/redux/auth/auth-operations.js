@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
-export const register = createAsyncThunk('auth/register', async credentials => {
+const register = createAsyncThunk('auth/register', async credentials => {
   try {
     const { data } = await axios.post('/users/signup', credentials);
     return data;
@@ -20,3 +20,6 @@ const logIn = createAsyncThunk('auth/login', async credentials => {
     console.log(error);
   }
 });
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { register, logIn };
