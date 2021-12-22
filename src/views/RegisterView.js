@@ -23,7 +23,7 @@ function RegisterView() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(authOperations.logIn({ name, email, password }));
+    dispatch(authOperations.register({ name, email, password }));
     setName('');
     setEmail('');
     setPassword('');
@@ -63,3 +63,5 @@ function RegisterView() {
     </>
   );
 }
+
+export default RegisterView;

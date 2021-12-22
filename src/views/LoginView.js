@@ -49,8 +49,10 @@ function LoginView() {
           />
         </label>
 
-        <button type="submit"></button>
+        <button type="submit">Login</button>
       </form>
     </>
   );
 }
+
+export default LoginView;
