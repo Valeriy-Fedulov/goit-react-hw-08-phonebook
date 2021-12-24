@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { Loading } from './components/loader';
-// import AppBar from './components/AppBar';
+import AppBar from './components/appbar';
 
 import './App.css';
 
@@ -24,6 +24,7 @@ const LoginView = lazy(() =>
 export default function App() {
   return (
     <>
+      <AppBar />
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<HomeView />} />
