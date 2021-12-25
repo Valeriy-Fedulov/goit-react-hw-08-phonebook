@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { Loading } from './components/loader';
 import AppBar from './components/appbar';
-import { authOperations } from './redux/auth';
+import { authOperations, authSelectors } from './redux/auth';
 
 import './App.css';
 import PrivateRoute from './components/privateroute/PrivateRoute';
@@ -25,44 +25,47 @@ const ContactsView = lazy(() =>
 
 export default function App() {
   const dispatch = useDispatch();
+  const isRefreshing = useSelector(authSelectors.getIsRefreshing);
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
 
   return (
-    <>
-      <AppBar />
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/" element={<HomeView />} />
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <RegisterView />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <LoginView />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
-              <PrivateRoute redirectTo="/login">
-                <ContactsView />
-              </PrivateRoute>
-            }
-          />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </Suspense>
-    </>
+    !isRefreshing && (
+      <>
+        <AppBar />
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<HomeView />} />
+            <Route
+              path="/register"
+              element={
+                <PublicRoute>
+                  <RegisterView />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute>
+                  <LoginView />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute redirectTo="/login">
+                  <ContactsView />
+                </PrivateRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Suspense>
+      </>
+    )
   );
 }
