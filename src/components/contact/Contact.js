@@ -21,7 +21,7 @@ export default function Contact() {
       )}
       {contacts.map(contact => (
         <li className={s.list} key={contact.id}>
-          {contact.name}: {contact.phone}
+          {contact.name}: {contact.number}
           <button
             className={s.button}
             type="button"

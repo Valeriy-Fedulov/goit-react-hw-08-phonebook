@@ -6,7 +6,7 @@ import { contactsSelectors } from '../../redux/contacts';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
 
   const items = useSelector(contactsSelectors.getItems);
   const dispatch = useDispatch();
@@ -16,14 +16,14 @@ export default function ContactForm() {
     if (items.find(contact => contact.name === name)) {
       alert(`${name} is already in contacts`);
     } else {
-      dispatch(contactsOperations.addContact({ name, phone }));
+      dispatch(contactsOperations.addContact({ name, number }));
       reset();
     }
   }
 
   function reset() {
     setName('');
-    setPhone('');
+    setNumber('');
   }
 
   return (
@@ -48,13 +48,13 @@ export default function ContactForm() {
         <input
           className={s.input}
           type="tel"
-          name="phone"
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
-          value={phone}
+          value={number}
           onChange={e => {
-            setPhone(e.currentTarget.value);
+            setNumber(e.currentTarget.value);
           }}
         />
       </label>
