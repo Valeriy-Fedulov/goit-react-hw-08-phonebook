@@ -2,22 +2,16 @@ import s from './Contact.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import ReactLoading from 'react-loading';
-import {
-  getVisibleContacts,
-  getLoading,
-} from '../../redux/contacts/contacts-selectors';
-import {
-  deleteContact,
-  fetchContacts,
-} from '../../redux/contacts/contacts-operations';
+import { contactsSelectors } from '../../redux/contacts';
+import { contactsOperations } from '../../redux/contacts';
 
 export default function Contact() {
-  const contacts = useSelector(getVisibleContacts);
-  const isLoading = useSelector(getLoading);
+  const contacts = useSelector(contactsSelectors.getVisibleContacts);
+  const isLoading = useSelector(contactsSelectors.getLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(contactsOperations.fetchContacts());
   }, [dispatch]);
 
   return (
@@ -31,7 +25,9 @@ export default function Contact() {
           <button
             className={s.button}
             type="button"
-            onClick={() => dispatch(deleteContact(contact.id))}
+            onClick={() =>
+              dispatch(contactsOperations.deleteContact(contact.id))
+            }
           >
             Delete
           </button>

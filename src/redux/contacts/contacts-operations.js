@@ -11,18 +11,21 @@ import {
   fetchContactsError,
 } from './contacts-actions';
 
-axios.defaults.baseURL = 'https://61b810b564e4a10017d18d8c.mockapi.io';
+// axios.defaults.baseURL = 'https://61b810b564e4a10017d18d8c.mockapi.io';
 
-export const fetchContacts = () => dispatch => {
+const fetchContacts = () => async dispatch => {
   dispatch(fetchContactsRequest());
 
-  axios
-    .get('/contacts')
-    .then(({ data }) => dispatch(fetchContactsSuccess(data)))
-    .catch(error => dispatch(fetchContactsError(error)));
+  try {
+    const { data } = await axios.get('/contacts');
+
+    dispatch(fetchContactsSuccess(data));
+  } catch (error) {
+    dispatch(fetchContactsError(error));
+  }
 };
 
-export const addContact =
+const addContact =
   ({ name, phone }) =>
   dispatch => {
     dispatch(addContactRequest());
@@ -33,7 +36,7 @@ export const addContact =
       .catch(error => dispatch(addContactError(error)));
   };
 
-export const deleteContact = id => dispatch => {
+const deleteContact = id => dispatch => {
   dispatch(deleteContactRequest());
 
   axios
@@ -41,3 +44,11 @@ export const deleteContact = id => dispatch => {
     .then(() => dispatch(deleteContactSuccess(id)))
     .catch(error => dispatch(deleteContactError(error)));
 };
+
+const contactsOperations = {
+  fetchContacts,
+  addContact,
+  deleteContact,
+};
+
+export default contactsOperations;

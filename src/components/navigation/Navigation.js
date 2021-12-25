@@ -4,16 +4,15 @@ import s from './Navigation.module.css';
 
 const active = ({ isActive }) => (isActive ? s.activeLink : s.link);
 
-const Navigation = () => (
-  <nav>
-    <NavLink to="/" className={active}>
-      Главная
-    </NavLink>
-
-    <NavLink to="/todos" className={active}>
-      Заметки
-    </NavLink>
-  </nav>
-);
-
-export default Navigation;
+export default function Navigation() {
+  return (
+    <nav>
+      <NavLink to="/" className={active}>
+        Главная
+      </NavLink>
+      <NavLink to="/contacts" className={active}>
+        Контакты
+      </NavLink>
+    </nav>
+  );
+}

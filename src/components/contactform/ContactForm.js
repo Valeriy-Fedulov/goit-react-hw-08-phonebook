@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import s from './ContactForm.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contacts/contacts-operations';
-import { getItems } from '../../redux/contacts/contacts-selectors';
+import { contactsOperations } from '../../redux/contacts';
+import { contactsSelectors } from '../../redux/contacts';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
-  const items = useSelector(getItems);
+  const items = useSelector(contactsSelectors.getItems);
   const dispatch = useDispatch();
 
   function handleSubmit(e) {
@@ -16,7 +16,7 @@ export default function ContactForm() {
     if (items.find(contact => contact.name === name)) {
       alert(`${name} is already in contacts`);
     } else {
-      dispatch(addContact({ name, phone }));
+      dispatch(contactsOperations.addContact({ name, phone }));
       reset();
     }
   }

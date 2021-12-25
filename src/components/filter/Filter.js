@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import s from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilter } from '../../redux/contacts/contacts-actions';
-import { getFilter } from '../../redux/contacts/contacts-selectors';
+import { setFilter } from '../../redux/contacts';
+import { contactsSelectors } from '../../redux/contacts';
 
 export default function Filter() {
-  const filter = useSelector(getFilter);
+  const filter = useSelector(contactsSelectors.getFilter);
   const dispatch = useDispatch();
 
   return (
