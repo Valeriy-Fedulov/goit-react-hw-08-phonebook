@@ -41,5 +41,20 @@ const logOut = createAsyncThunk('auth/logout', async () => {
   }
 });
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default { register, logIn, logOut };
+const fetchCurrentUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.auth.token;
+    console.log(token);
+  },
+);
+
+const authOperations = {
+  register,
+  logIn,
+  logOut,
+  fetchCurrentUser,
+};
+
+export default authOperations;

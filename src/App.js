@@ -1,7 +1,10 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { Loading } from './components/loader';
 import AppBar from './components/appbar';
+import { authOperations } from './redux/auth';
 
 import './App.css';
 
@@ -22,6 +25,12 @@ const LoginView = lazy(() =>
 );
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser);
+  }, [dispatch]);
+
   return (
     <>
       <AppBar />
