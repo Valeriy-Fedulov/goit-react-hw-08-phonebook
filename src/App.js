@@ -7,21 +7,19 @@ import AppBar from './components/appbar';
 import { authOperations } from './redux/auth';
 
 import './App.css';
-
-const ContactsView = lazy(() =>
-  import('./views/ContactsView' /* webpackChunkName: "ContactsView" */),
-);
+import PrivateRoute from './components/privateroute/PrivateRoute';
 
 const HomeView = lazy(() =>
   import('./views/HomeView' /* webpackChunkName: "HomeView" */),
 );
-
 const RegisterView = lazy(() =>
   import('./views/RegisterView' /* webpackChunkName: "RegisterView" */),
 );
-
 const LoginView = lazy(() =>
   import('./views/LoginView' /* webpackChunkName: "LoginView" */),
+);
+const ContactsView = lazy(() =>
+  import('./views/ContactsView' /* webpackChunkName: "ContactsView" */),
 );
 
 export default function App() {
@@ -39,7 +37,9 @@ export default function App() {
           <Route path="/" element={<HomeView />} />
           <Route path="/register" element={<RegisterView />} />
           <Route path="/login" element={<LoginView />} />
-          <Route path="/contacts" element={<ContactsView />} />
+          {/* <Route path="/contacts" element={<ContactsView />} /> */}
+
+          <Route path="/contacts" element={<PrivateRoute />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
