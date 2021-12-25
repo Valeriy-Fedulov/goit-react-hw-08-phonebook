@@ -15,10 +15,13 @@ const token = {
 const register = createAsyncThunk('auth/register', async credentials => {
   try {
     const { data } = await axios.post('/users/signup', credentials);
+    if (!data) return;
     token.set(data.token);
     return data;
   } catch (error) {
-    console.log(error);
+    alert('Такой пользователь уже существует!');
+
+    return Promise.reject(new Error(error));
   }
 });
 
@@ -28,7 +31,9 @@ const logIn = createAsyncThunk('auth/login', async credentials => {
     token.set(data.token);
     return data;
   } catch (error) {
-    console.log(error);
+    alert('Неправильный логин или пароль');
+
+    return Promise.reject(new Error(error));
   }
 });
 
