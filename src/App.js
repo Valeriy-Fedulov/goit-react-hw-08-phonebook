@@ -8,6 +8,7 @@ import { authOperations } from './redux/auth';
 
 import './App.css';
 import PrivateRoute from './components/privateroute/PrivateRoute';
+import PublicRoute from './components/publicroute/PublicRoute';
 
 const HomeView = lazy(() =>
   import('./views/HomeView' /* webpackChunkName: "HomeView" */),
@@ -35,11 +36,30 @@ export default function App() {
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<HomeView />} />
-          <Route path="/register" element={<RegisterView />} />
-          <Route path="/login" element={<LoginView />} />
-          {/* <Route path="/contacts" element={<ContactsView />} /> */}
-
-          <Route path="/contacts" element={<PrivateRoute />} />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <RegisterView />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <LoginView />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login">
+                <ContactsView />
+              </PrivateRoute>
+            }
+          />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
