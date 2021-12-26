@@ -12,7 +12,7 @@ const Navigation = () => {
   return (
     <nav>
       <NavLink to="/" className={active}>
-        Главная
+        Home
       </NavLink>
 
       {isLoggedIn && (

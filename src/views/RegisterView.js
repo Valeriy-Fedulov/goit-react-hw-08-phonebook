@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
 
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import TextField from '@mui/material/TextField';
+
 function RegisterView() {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
@@ -31,34 +35,44 @@ function RegisterView() {
 
   return (
     <>
-      <h1>Страница регистрации</h1>
+      <h1>Sing up</h1>
       <form onSubmit={handleSubmit} autoComplete="off">
         <label>
-          Имя
-          <input type="text" name="name" value={name} onChange={handleChange} />
+          <TextField
+            label="Name"
+            type="text"
+            name="name"
+            value={name}
+            required
+            onChange={handleChange}
+          />
         </label>
 
         <label>
-          Почта
-          <input
+          <TextField
+            label="Email"
             type="email"
             name="email"
             value={email}
+            required
             onChange={handleChange}
           />
         </label>
 
         <label>
-          Пароль
-          <input
+          <TextField
+            label="Password"
             type="password"
             name="password"
             value={password}
+            required
             onChange={handleChange}
           />
         </label>
 
-        <button type="submit">Зарегистрироваться</button>
+        <Button variant="contained" endIcon={<SendIcon />} type="submit">
+          Sing up
+        </Button>
       </form>
     </>
   );

@@ -5,10 +5,10 @@ import { lazy, Suspense } from 'react';
 import { Loading } from './components/loader';
 import AppBar from './components/appbar';
 import { authOperations, authSelectors } from './redux/auth';
-
-import './App.css';
 import PrivateRoute from './components/privateroute/PrivateRoute';
 import PublicRoute from './components/publicroute/PublicRoute';
+
+import './App.css';
 
 const HomeView = lazy(() =>
   import('./views/HomeView' /* webpackChunkName: "HomeView" */),

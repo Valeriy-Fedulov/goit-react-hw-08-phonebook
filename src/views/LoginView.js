@@ -2,6 +2,11 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
 
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+
 function LoginView() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
@@ -26,32 +31,43 @@ function LoginView() {
   };
 
   return (
-    <>
-      <h1>Страница логина</h1>
+    <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <h1>Sing in</h1>
       <form onSubmit={handleSubmit} autoComplete="off">
         <label>
-          Почта
-          <input
+          <TextField
+            label="Email"
             type="email"
             name="email"
             value={email}
+            required
             onChange={handleChange}
           />
         </label>
 
         <label>
-          Пароль
-          <input
+          <TextField
+            label="Password"
             type="password"
             name="password"
             value={password}
+            required
             onChange={handleChange}
           />
         </label>
 
-        <button type="submit">Login</button>
+        <Button variant="contained" endIcon={<SendIcon />} type="submit">
+          Login
+        </Button>
       </form>
-    </>
+    </Box>
   );
 }
 

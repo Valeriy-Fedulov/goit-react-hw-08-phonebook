@@ -5,6 +5,9 @@ import ReactLoading from 'react-loading';
 import { contactsSelectors } from '../../redux/contacts';
 import { contactsOperations } from '../../redux/contacts';
 
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 export default function Contact() {
   const contacts = useSelector(contactsSelectors.getVisibleContacts);
   const isLoading = useSelector(contactsSelectors.getLoading);
@@ -22,7 +25,9 @@ export default function Contact() {
       {contacts.map(contact => (
         <li className={s.list} key={contact.id}>
           {contact.name}: {contact.number}
-          <button
+          <Button
+            variant="contained"
+            startIcon={<DeleteIcon />}
             className={s.button}
             type="button"
             onClick={() =>
@@ -30,7 +35,7 @@ export default function Contact() {
             }
           >
             Delete
-          </button>
+          </Button>
         </li>
       ))}
     </>
