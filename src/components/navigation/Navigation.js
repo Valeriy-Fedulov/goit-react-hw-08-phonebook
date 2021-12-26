@@ -5,6 +5,7 @@ import { authSelectors } from '../../redux/auth';
 import s from './Navigation.module.css';
 
 import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Divider';
 
 const active = ({ isActive }) => (isActive ? s.activeLink : s.link);
 
@@ -13,7 +14,11 @@ const Navigation = () => {
 
   return (
     <nav>
-      <Stack spacing={2} direction="row">
+      <Stack
+        spacing={2}
+        direction="row"
+        divider={<Divider orientation="vertical" color="white" flexItem />}
+      >
         <NavLink to="/" className={active}>
           Home
         </NavLink>

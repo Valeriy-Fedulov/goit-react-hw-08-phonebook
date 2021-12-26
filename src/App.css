@@ -1,0 +1,25 @@
+body {
+  background-image: url(./image/bg.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+h1 {
+  font-size: 100px;
+  position: absolute;
+  top: 40%;
+  left: -150px;
+  color: white;
+  transform: rotate(-90deg);
+  text-align: center;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: #e84a5f;
+}

@@ -2,7 +2,11 @@ import React from 'react';
 
 const HomeView = () => (
   <div>
-    <h1>Приветственная страница нашего сервиса{''}</h1>
+    <h1>
+      PHONEBOOK
+      <br />
+      Welcome!
+    </h1>
   </div>
 );
 

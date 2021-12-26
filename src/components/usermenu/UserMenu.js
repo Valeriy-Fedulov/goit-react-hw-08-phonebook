@@ -4,20 +4,7 @@ import defaultAvatar from './avatar.jpeg';
 
 import Button from '@mui/material/Button';
 import LogoutIcon from '@mui/icons-material/Logout';
-
-const styles = {
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  avatar: {
-    marginRight: 4,
-  },
-  name: {
-    fontWeight: 700,
-    marginRight: 12,
-  },
-};
+import Stack from '@mui/material/Stack';
 
 export default function UserMenu() {
   const dispatch = useDispatch();
@@ -25,9 +12,9 @@ export default function UserMenu() {
   const avatar = defaultAvatar;
 
   return (
-    <div style={styles.container}>
-      <img src={avatar} alt="" width="32" style={styles.avatar} />
-      <span style={styles.name}>{name}</span>
+    <Stack spacing={2} direction="row" alignItems="center">
+      <img src={avatar} alt="" width="32" height="32" />
+      <span>{name}</span>
       <Button
         variant="contained"
         type="button"
@@ -36,6 +23,6 @@ export default function UserMenu() {
       >
         Logout
       </Button>
-    </div>
+    </Stack>
   );
 }

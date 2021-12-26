@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import s from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFilter } from '../../redux/contacts';
 import { contactsSelectors } from '../../redux/contacts';
@@ -24,7 +23,6 @@ export default function Filter() {
       <Paper elevation={3}>
         <TextField
           label="Find contacts by name"
-          className={s.input}
           type="text"
           name="filter"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"

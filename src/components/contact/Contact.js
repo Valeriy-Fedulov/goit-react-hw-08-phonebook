@@ -37,8 +37,8 @@ export default function Contact() {
         <ReactLoading type="bars" color="black" height={167} width={75} />
       )}
       {contacts.map(contact => (
-        <Paper elevation={3}>
-          <ListItem key={contact.id}>
+        <Paper key={contact.id} elevation={3}>
+          <ListItem>
             <ListItemAvatar>
               <Avatar>
                 <ContactPhoneIcon />

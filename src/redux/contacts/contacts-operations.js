@@ -11,8 +11,6 @@ import {
   fetchContactsError,
 } from './contacts-actions';
 
-// axios.defaults.baseURL = 'https://61b810b564e4a10017d18d8c.mockapi.io';
-
 const fetchContacts = () => async dispatch => {
   dispatch(fetchContactsRequest());
 

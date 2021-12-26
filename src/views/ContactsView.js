@@ -7,12 +7,11 @@ import Box from '@mui/material/Box';
 
 const Contacts = () => (
   <Box
-    component="form"
     sx={{
       textAlign: 'center',
     }}
   >
-    <h1>Phonebook</h1>
+    <h2>Phonebook</h2>
     <ContactForm />
     <h2>Contacts</h2>
     <Filter />
