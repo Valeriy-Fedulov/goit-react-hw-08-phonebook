@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/components/filter/Filter.module.css"],"names":[],"mappings":"AAAA,qBACE,YAAa,CACb,qBAAsB,CACtB,aACF","file":"ContactsView.3a9a9d41.chunk.css","sourcesContent":[".input {\n  display: flex;\n  flex-direction: column;\n  margin: 10px 0;\n}\n"]}
