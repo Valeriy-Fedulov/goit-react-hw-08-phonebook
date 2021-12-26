@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { Loading } from './components/loader';
-import AppBar from './components/appbar';
+import HeaderAppBar from './components/appbar';
 import { authOperations, authSelectors } from './redux/auth';
 import PrivateRoute from './components/privateroute/PrivateRoute';
 import PublicRoute from './components/publicroute/PublicRoute';
@@ -34,7 +34,7 @@ export default function App() {
   return (
     !isRefreshing && (
       <>
-        <AppBar />
+        <HeaderAppBar />
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<HomeView />} />

@@ -3,8 +3,10 @@ import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
 
 import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
 function RegisterView() {
   const dispatch = useDispatch();
@@ -34,9 +36,31 @@ function RegisterView() {
   };
 
   return (
-    <>
-      <h1>Sing up</h1>
-      <form onSubmit={handleSubmit} autoComplete="off">
+    <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '100%' },
+
+        display: 'flex',
+        position: 'absolute',
+        right: '0',
+        top: '0',
+        height: '100vh',
+        width: '30%',
+        marginLeft: 'auto',
+        zIndex: '-1',
+        '& > :not(style)': {
+          m: 1,
+          padding: '100px 30px',
+          textAlign: 'center',
+        },
+      }}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
+      <Paper elevation={3}>
+        <h1>Sing up</h1>
         <label>
           <TextField
             label="Name"
@@ -47,7 +71,6 @@ function RegisterView() {
             onChange={handleChange}
           />
         </label>
-
         <label>
           <TextField
             label="Email"
@@ -58,7 +81,6 @@ function RegisterView() {
             onChange={handleChange}
           />
         </label>
-
         <label>
           <TextField
             label="Password"
@@ -69,12 +91,15 @@ function RegisterView() {
             onChange={handleChange}
           />
         </label>
-
-        <Button variant="contained" endIcon={<SendIcon />} type="submit">
+        <Button
+          variant="contained"
+          endIcon={<AppRegistrationIcon />}
+          type="submit"
+        >
           Sing up
         </Button>
-      </form>
-    </>
+      </Paper>
+    </Box>
   );
 }
 

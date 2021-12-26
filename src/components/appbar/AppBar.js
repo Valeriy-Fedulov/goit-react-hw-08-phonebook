@@ -4,21 +4,34 @@ import UserMenu from '../usermenu';
 import AuthNav from '../authnav';
 import { authSelectors } from '../../redux/auth';
 
-const styles = {
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottom: '1px solid #2A363B',
-  },
-};
+import Box from '@mui/material/Box';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import CottageIcon from '@mui/icons-material/Cottage';
+import Typography from '@mui/material/Typography';
 
-export default function AppBar() {
+export default function HeaderAppBar() {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   return (
-    <header style={styles.header}>
-      <Navigation />
-      {isLoggedIn ? <UserMenu /> : <AuthNav />}
-    </header>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <CottageIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Navigation />
+          </Typography>
+          {isLoggedIn ? <UserMenu /> : <AuthNav />}
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }

@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
 
 import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
+import LoginIcon from '@mui/icons-material/Login';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
 function LoginView() {
   const dispatch = useDispatch();
@@ -34,13 +35,28 @@ function LoginView() {
     <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
+        '& .MuiTextField-root': { m: 1, width: '100%' },
+
+        display: 'flex',
+        position: 'absolute',
+        right: '0',
+        top: '0',
+        height: '100vh',
+        width: '30%',
+        marginLeft: 'auto',
+        zIndex: '-1',
+        '& > :not(style)': {
+          m: 1,
+          padding: '100px 30px',
+          textAlign: 'center',
+        },
       }}
       noValidate
       autoComplete="off"
+      onSubmit={handleSubmit}
     >
-      <h1>Sing in</h1>
-      <form onSubmit={handleSubmit} autoComplete="off">
+      <Paper elevation={3}>
+        <h1>Sing in</h1>
         <label>
           <TextField
             label="Email"
@@ -49,9 +65,8 @@ function LoginView() {
             value={email}
             required
             onChange={handleChange}
-          />
+          ></TextField>
         </label>
-
         <label>
           <TextField
             label="Password"
@@ -62,11 +77,10 @@ function LoginView() {
             onChange={handleChange}
           />
         </label>
-
-        <Button variant="contained" endIcon={<SendIcon />} type="submit">
+        <Button variant="contained" endIcon={<LoginIcon />} type="submit">
           Login
         </Button>
-      </form>
+      </Paper>
     </Box>
   );
 }

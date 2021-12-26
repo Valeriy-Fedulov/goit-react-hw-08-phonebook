@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
@@ -35,12 +36,21 @@ export default function ContactForm() {
     <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
+        '& .MuiTextField-root': { m: 1, width: '100%' },
+        display: 'flex',
+        justifyContent: 'center',
+
+        '& > :not(style)': {
+          m: 1,
+          padding: '30px',
+          textAlign: 'center',
+        },
       }}
       noValidate
       autoComplete="off"
+      onSubmit={handleSubmit}
     >
-      <form className={s.form} onSubmit={handleSubmit}>
+      <Paper elevation={3}>
         <label>
           <TextField
             label="Name"
@@ -72,7 +82,7 @@ export default function ContactForm() {
         <Button variant="contained" endIcon={<SendIcon />} type="submit">
           Add contact
         </Button>
-      </form>
+      </Paper>
     </Box>
   );
 }

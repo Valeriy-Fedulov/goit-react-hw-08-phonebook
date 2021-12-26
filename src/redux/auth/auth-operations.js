@@ -19,7 +19,7 @@ const register = createAsyncThunk('auth/register', async credentials => {
     token.set(data.token);
     return data;
   } catch (error) {
-    alert('Такой пользователь уже существует!');
+    alert('This user already exists!');
 
     return Promise.reject(new Error(error));
   }
@@ -31,7 +31,7 @@ const logIn = createAsyncThunk('auth/login', async credentials => {
     token.set(data.token);
     return data;
   } catch (error) {
-    alert('Неправильный логин или пароль');
+    alert('Incorrect login or password!');
 
     return Promise.reject(new Error(error));
   }
