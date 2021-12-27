@@ -42,7 +42,7 @@ const logOut = createAsyncThunk('auth/logout', async () => {
     await axios.post('/users/logout');
     token.unset();
   } catch (error) {
-    console.log(error);
+    return Promise.reject(new Error(error));
   }
 });
 
@@ -59,7 +59,7 @@ const fetchCurrentUser = createAsyncThunk(
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
-      console.log(error);
+      return Promise.reject(new Error(error));
     }
   },
 );
