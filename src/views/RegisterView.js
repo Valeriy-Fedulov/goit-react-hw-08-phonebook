@@ -60,7 +60,7 @@ function RegisterView() {
       onSubmit={handleSubmit}
     >
       <Paper elevation={3}>
-        <h1>Sing up</h1>
+        <h2>Sing up</h2>
         <label>
           <TextField
             label="Name"

@@ -56,7 +56,7 @@ function LoginView() {
       onSubmit={handleSubmit}
     >
       <Paper elevation={3}>
-        <h1>Sing in</h1>
+        <h2>Sing in</h2>
         <label>
           <TextField
             label="Email"
