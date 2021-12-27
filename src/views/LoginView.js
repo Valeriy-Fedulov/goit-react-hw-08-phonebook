@@ -49,6 +49,7 @@ function LoginView() {
           m: 1,
           padding: '100px 30px',
           textAlign: 'center',
+          width: '100%',
         },
       }}
       noValidate
